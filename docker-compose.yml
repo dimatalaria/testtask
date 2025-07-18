@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:16-bookworm
+    volumes:
+      - data:/var/lib/postgresql/data/
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+
+
+
+
+volumes:
+  data:
